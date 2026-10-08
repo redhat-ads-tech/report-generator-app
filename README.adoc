@@ -1,0 +1,37 @@
+= Acme Report Generator
+
+An internal Spring Boot service that generates scheduled compliance and analytics reports for Acme Inc.'s operations team.
+
+== Risk Classification
+
+*Low Risk* — This is an internal batch-processing service that runs on a schedule. It is not customer-facing and has no real-time availability requirements. Reports can be regenerated if needed.
+
+== Purpose
+
+This application is a sample used in the https://github.com/rhpds/lightwell-workshop[Lightwell Workshop] at Red Hat One. It is intentionally built with outdated dependencies containing known vulnerabilities (CVEs). During the workshop, this application is used specifically for the *deterministic remediation* path using Renovate, demonstrating how non-AI tooling can automatically generate merge requests to bump vulnerable dependency versions.
+
+== Known Vulnerable Dependencies
+
+[cols="2,1,2",options="header"]
+|===
+| Dependency | Version | Notes
+| Spring Boot | 2.7.18 | End-of-life Spring Boot 2.x with multiple transitive CVEs
+| Spring Cloud Netflix Hystrix | 2.2.10.RELEASE | Deprecated circuit breaker (Netflix OSS EOL)
+| Spring Cloud Netflix Ribbon | 2.2.10.RELEASE | Deprecated client-side load balancer
+| Spring Cloud Netflix Zuul | 2.2.10.RELEASE | Deprecated API gateway
+| Jackson Databind | (managed) | Transitive version with known deserialization CVEs
+| PostgreSQL Driver | (managed) | Runtime database driver
+|===
+
+== Build
+
+[source,bash]
+----
+mvn package -DskipTests
+----
+
+Produces `target/report-generator-app-1.0.0.jar`.
+
+== License
+
+Sample code for demonstration purposes only. Not intended for production use.
